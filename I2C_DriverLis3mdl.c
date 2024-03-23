@@ -31,7 +31,7 @@
 // @return  : STATUS_OK    FULL SCALE READ SUCCESSFULLY  
 //            STATUS_ERROR FULL SCALE READ FAILED   
 //
-status_t LIS3MDL_getFullScale()
+status_t LIS3MDL_getFullScaleConf()
 {
 status_t st; 
 st = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_CTRL_REG2,LIS3MDL_DATA8,&LIS3MDL_getFullScale);

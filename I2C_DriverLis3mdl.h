@@ -111,7 +111,7 @@ static uint8_t LIS3MDL_disableIntPin           = 0x00;
 
 // FUNCTION PROTOTYOES
 
-status_t  LIS3MDL_getFullScale();
+status_t LIS3MDL_getFullScaleConf();
 
 status_t LIS3MDL_setOutputDataRateXYZ_0_625();
 status_t LIS3MDL_setOutputDataRateXYZ_1_25();
