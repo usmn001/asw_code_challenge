@@ -51,16 +51,6 @@
 
 
 //
-// MAGNETOMETER : FULL SCALES 
-//
-#define LIS3MDL_CTRL_REG2_FS_DEFAULT      ((uint8_t) 0x00)
-#define LIS3MDL_CTRL_REG2_FS_4_GA         ((uint8_t) 0x00)  // FULL SCALE = ±4 GAUSS 
-#define LIS3MDL_CTRL_REG2_FS_8_GA         ((uint8_t) 0x20)  
-#define LIS3MDL_CTRL_REG2_FS_12_GA        ((uint8_t) 0x40)  
-#define LIS3MDL_CTRL_REG2_FS_16_GA        ((uint8_t) 0x60)  
-
-
-//
 // MAGNETOMETER : CONTINOUS AND SINGLE CONVERSION OPERATING MODES
 // 
 #define LIS3MDL_CTRL_REG3_OM_SINGLE       ((uint8_t) 0x01)  // Single Conversion Mode For 0.625 Hz - 80 Hz
@@ -80,12 +70,10 @@
 #define LIS3MDL_DATA8                         1  //  1 Byte, 8 Bits
 
 
-
-
 //
 // MAGNETOMETER : OUTPUT DATA RATES FROM 0.625 Hz - 80 Hz FOR X,Y,Z AXIS
 // 
-static uint8_t LIS3MDL_setDataRateXYZ_0_625_Hz = 0x00; // Output Data Rate = 0.625 Hz  
+static uint8_t LIS3MDL_setDataRateXYZ_0_625_Hz =  0x00; // Output Data Rate = 0.625 Hz  
 static uint8_t LIS3MDL_setDataRateXYZ_1_25_Hz  =  0x04;  
 static uint8_t LIS3MDL_setDataRateXYZ_2_5_Hz   =  0x08;   
 static uint8_t LIS3MDL_setDataRateXYZ_5_0_Hz   =  0x0C;  // Output Data Rate = 5.0 Hz   
@@ -98,26 +86,32 @@ static uint8_t LIS3MDL_setDataRateXYZ_80_Hz    =  0x1C;
 // 
 // MAGNETOMETER : OUTPUT DATA RATES 155 Hz - 1000 Hz For X,Y AXIS, FAST_ODR Bit = 1
 //  
-static uint8_t LIS3MDL_setDataRateXY_155_Hz  = 0x62;  // Output Data Rate = 155 Hz,  UHP Mode 
-static uint8_t LIS3MDL_setDataRateXY_300_Hz  = 0x42;  // Output Data Rate = 300 Hz,  HP Mode 
-static uint8_t LIS3MDL_setDataRateXY_560_Hz  = 0x22;  // Output Data Rate = 560 Hz,  MP Mode
-static uint8_t LIS3MDL_setDataRateXY_1000_Hz = 0x02;  // Output Data Rate = 1000 Hz, LP Mode  
+static uint8_t LIS3MDL_setDataRateXY_155_Hz    = 0x62;  // Output Data Rate = 155 Hz,  UHP Mode 
+static uint8_t LIS3MDL_setDataRateXY_300_Hz    = 0x42;  // Output Data Rate = 300 Hz,  HP Mode 
+static uint8_t LIS3MDL_setDataRateXY_560_Hz    = 0x22;  // Output Data Rate = 560 Hz,  MP Mode
+static uint8_t LIS3MDL_setDataRateXY_1000_Hz   = 0x02;  // Output Data Rate = 1000 Hz, LP Mode  
 
 
 //
 // MAGNETOMETER : OUTPUT DATA RATES 155 Hz - 1000 Hz For Z AXIS
 // BYTE ORDER :   DEFAULT LITTLE ENDIAN 
 // 
-static uint8_t LIS3MDL_setDataRateZ_155_Hz  =    0x00;  // Output Data Rate = 1000 Hz,  LP Mode 
-static uint8_t LIS3MDL_setDataRateZ_300_Hz  =    0x04;  // Output Data Rate = 560 Hz,   MP Mode 
-static uint8_t LIS3MDL_setDataRateZ_560_Hz  =    0x08;  // Output Data Rate = 300 Hz,   HP Mode
-static uint8_t LIS3MDL_setDataRateZ_1000_Hz =    0x0C;  // Output Data Rate = 155 Hz,   UHP Mode  
+static uint8_t LIS3MDL_setDataRateZ_155_Hz     =    0x00;  // Output Data Rate = 155 Hz,   UHP Mode 
+static uint8_t LIS3MDL_setDataRateZ_300_Hz     =    0x04;  // Output Data Rate = 300 Hz,   HP Mode 
+static uint8_t LIS3MDL_setDataRateZ_560_Hz     =    0x08;  // Output Data Rate = 560 Hz,   MP Mode
+static uint8_t LIS3MDL_setDataRateZ_1000_Hz    =    0x0C;  // Output Data Rate = 1000 Hz,  LP Mode  
 
 
-static uint8_t LIS3MDL_HIGH_DATARATE_Z = 0;
-static uint8_t LIS3MDL_DATARATE_XYZ = 0;
-static uint8_t LIS3MDL_INTE = 0x01;         
-static uint8_t LIS3MDL_INTD = 0x00;         
+static uint8_t LIS3MDL_getFullScale            = 0;
+static uint8_t LIS3MDL_getHighDataRate_Z       = 0;
+static uint8_t LIS3MDL_getDataRate_XYZ         = 0;
+static uint8_t LIS3MDL_enableIntPin            = 0x01;         
+static uint8_t LIS3MDL_disableIntPin           = 0x00;         
+
+
+// FUNCTION PROTOTYOES
+
+status_t  LIS3MDL_getFullScale();
 
 status_t LIS3MDL_setOutputDataRateXYZ_0_625();
 status_t LIS3MDL_setOutputDataRateXYZ_1_25();
@@ -127,7 +121,6 @@ status_t LIS3MDL_setOutputDataRateXYZ_10();
 status_t LIS3MDL_setOutputDataRateXYZ_20();
 status_t LIS3MDL_setOutputDataRateXYZ_40();
 status_t LIS3MDL_setOutputDataRateXYZ_80();
-
 
 status_t LIS3MDL_setHighOutputDataRateXY_155();
 status_t LIS3MDL_setHighOutputDataRateXY_300();
@@ -139,12 +132,10 @@ status_t LIS3MDL_setHighOutputDataRateZ_300();
 status_t LIS3MDL_setHighOutputDataRateZ_560();
 status_t LIS3MDL_setHighOutputDataRateZ_1000();
 
-
-
 status_t  LIS3MDL_getHighOutputDataRateZ();
 status_t  LIS3MDL_getOutputDataRateXYZ();
-status_t LIS3MDL_enableInterruptInt();
-status_t LIS3MDL_disableInterruptInt();
+status_t  LIS3MDL_enableInterruptInt();
+status_t  LIS3MDL_disableInterruptInt();
 
 #endif
 
