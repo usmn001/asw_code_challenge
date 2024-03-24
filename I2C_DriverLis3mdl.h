@@ -69,7 +69,6 @@
 #define LIS3MDL_DATA16                        2  // 2 Bytes, 16 Bits
 #define LIS3MDL_DATA8                         1  //  1 Byte, 8 Bits
 
-
 //
 // MAGNETOMETER : OUTPUT DATA RATES FROM 0.625 Hz - 80 Hz FOR X,Y,Z AXIS
 // 
@@ -109,13 +108,18 @@ static uint8_t LIS3MDL_getDataRate_XYZ         = 0x00;
 static uint8_t LIS3MDL_enableIntPin            = 0x01;         
 static uint8_t LIS3MDL_disableIntPin           = 0x00;         
 
-static uint8_t LIS3MDL_getStatusX              = 0x00;
-static uint8_t LIS3MDL_getStatusY              = 0x00;
-static uint8_t LIS3MDL_getStatusZ              = 0x00;
 
-static uint16_t LIS3MDL_getOutputDataX         = 0x0000;
-static uint16_t LIS3MDL_getOutputDataY         = 0x0000;
-static uint16_t LIS3MDL_getOutputDataZ         = 0x0000;
+extern uint8_t LIS3MDL_getStatusX;
+extern uint8_t LIS3MDL_getStatusY;
+extern uint8_t LIS3MDL_getStatusZ;
+
+extern uint16_t  LIS3MDL_getOffset_X;
+extern uint16_t  LIS3MDL_getOffset_Y;
+extern uint16_t  LIS3MDL_getOffset_Z; 
+
+extern uint16_t LIS3MDL_getOutputData_X;       
+extern uint16_t LIS3MDL_getOutputData_Y;     
+extern uint16_t LIS3MDL_getOutputData_Z;       
 
 
 // FUNCTION PROTOTYOES
@@ -149,6 +153,10 @@ status_t  LIS3MDL_disableInterruptInt();
 status_t  LIS3MDL_getOutputStatusX();
 status_t  LIS3MDL_getOutputStatusY();
 status_t  LIS3MDL_getOutputStatusZ();
+
+status_t  LIS3MDL_getOffsetX();
+status_t  LIS3MDL_getOffsetY();
+status_t  LIS3MDL_getOffsetZ();
 
 status_t  LIS3MDL_getOutputX();
 status_t  LIS3MDL_getOutputY();
