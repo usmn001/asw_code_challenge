@@ -608,7 +608,7 @@ return st;
 // @return  : STATUS_OK    STATUS REGISTER READ SUCCESSFULLY  
 //            STATUS_ERROR STATUS REGISTER READ FAILED   
 //
-status_t LIS3MDL_LIS3MDL_getOutputStatusX()
+status_t LIS3MDL_getOutputStatusX()
 {
 status_t st; 
 st = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_STATUS_REG,LIS3MDL_DATA8,&LIS3MDL_getStatusX);
@@ -644,7 +644,7 @@ return st;
 // @return  : STATUS_OK    STATUS REGISTER READ SUCCESSFULLY  
 //            STATUS_ERROR STATUS REGISTER READ FAILED   
 //
-status_t LIS3MDL_LIS3MDL_getOutputStatusY()
+status_t LIS3MDL_getOutputStatusY()
 {
 status_t st; 
 st = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_STATUS_REG,LIS3MDL_DATA8,&LIS3MDL_getStatusY);
@@ -677,7 +677,7 @@ return st;
 // @return  : STATUS_OK    STATUS REGISTER READ SUCCESSFULLY  
 //            STATUS_ERROR STATUS REGISTER READ FAILED   
 //
-status_t LIS3MDL_LIS3MDL_getOutputStatusZ()
+status_t LIS3MDL_getOutputStatusZ()
 {
 status_t st; 
 st = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_STATUS_REG,LIS3MDL_DATA8,&LIS3MDL_getStatusZ);
