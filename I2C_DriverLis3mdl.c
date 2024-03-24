@@ -735,7 +735,7 @@ uint8_t x_msb = 0;
 
 st_reg =LIS3MDL_getOutputStatusX();
 
-if(st_reg!=STATUS_ERROR && LIS3MDL_getStatusX == 0x11)
+if(st_reg!=STATUS_ERROR && LIS3MDL_getStatusX == LIS3MDL_xaxisNoOverunNewData)
 {
 st_l = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_L,LIS3MDL_DATA8,&x_lsb);
 st_h = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_H,LIS3MDL_DATA8,&x_msb);
@@ -884,7 +884,7 @@ uint8_t y_msb = 0;
 
 st_reg =LIS3MDL_getOutputStatusY();
 
-if(st_reg!=STATUS_ERROR && LIS3MDL_getStatusY == 0x22)
+if(st_reg!=STATUS_ERROR && LIS3MDL_getStatusY == LIS3MDL_yaxisNoOverunNewData)
 {
 st_l = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_L,LIS3MDL_DATA8,&y_lsb);
 st_h = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_H,LIS3MDL_DATA8,&y_msb);
@@ -1033,7 +1033,7 @@ uint8_t z_msb = 0;
 
 st_reg =LIS3MDL_getOutputStatusZ();
 
-if(st_reg!=STATUS_ERROR && LIS3MDL_getStatusZ == 0x44)
+if(st_reg!=STATUS_ERROR && LIS3MDL_getStatusZ == LIS3MDL_zaxisNoOverunNewData)
 {
 st_l = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Z_L,LIS3MDL_DATA8,&z_lsb);
 st_h = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Z_H,LIS3MDL_DATA8,&z_msb);

@@ -80,6 +80,17 @@
 #define LIS3MDL_DATA16                        2  // 2 Bytes, 16 Bits
 #define LIS3MDL_DATA8                         1  //  1 Byte, 8 Bits
 
+// @enum LIS3MDL_statusreg
+// Provides enumerated names of status register values for x,y,z axis indicating new data is available
+// and no overrun has occured
+enum LIS3MDL_statusreg
+{
+LIS3MDL_xaxisNoOverunNewData = 0x11,    
+LIS3MDL_yaxisNoOverunNewData = 0x22,  
+LIS3MDL_zaxisNoOverunNewData = 0x44
+};
+
+
 //
 // MAGNETOMETER : OUTPUT DATA RATES FROM 0.625 Hz - 80 Hz FOR X,Y,Z AXIS
 // 
