@@ -1,4 +1,15 @@
 
+// $$FILEHEADER*****************************************************************
+// $$File Name : I2C_DriverLis3mdl.h @https://github.com/usmn001/asw_code_challenge/blob/musman/I2C_DriverLis3mdl.h
+// $$Designer : M USMAN
+// $$Company :  AAC Clyde Space
+// ------------------------------------------------------------------------------
+// Copyright (c) 2024, AAC Clyde Space
+// ------------------------------------------------------------------------------
+// $$File description: THIS FILE PROVIDES THE FUNCTION PROTOTYPES, DEFINE PREPROCESSOR DIRECTIVES FOR THE I2C DRIVER OF 
+// LIS3MDL MAGNETOMETER ASSOCIATED FUNCTIONS. THESE FUNCTION PROTOTYPES AND PREPROCESSOR DIRECTIVES ARE REQUIRED FOR FUNCTION DEFINITIONS.
+//
+//******************************************************************************
 #ifndef I2C_DRIVER_LIS3MDL_H
 #define I2C_DRIVER_LIS3MDL_H
 
@@ -161,10 +172,6 @@ status_t  LIS3MDL_getOffsetZ();
 status_t  LIS3MDL_getOutputX();
 status_t  LIS3MDL_getOutputY();
 status_t  LIS3MDL_getOutputZ();
-
-
-
-
 
 #endif
 

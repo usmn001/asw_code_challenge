@@ -1,5 +1,17 @@
 
-
+// $$FILEHEADER*****************************************************************
+// $$File Name : I2C_DriverLis3mdl.c @https://github.com/usmn001/asw_code_challenge/blob/musman/I2C_DriverLis3mdl.c
+// $$Designer : M USMAN
+// $$Company :  AAC Clyde Space
+// ------------------------------------------------------------------------------
+// Copyright (c) 2024, AAC Clyde Space
+// ------------------------------------------------------------------------------
+// $$File description: THIS FILE PROVIDES THE DEFINTIONS FOR THE I2C DRIVER OF LIS3MDL MAGNETOMETER ASSOCIATED FUNCTIONS
+// THESE FUNCTIONS PROVIDE THE FUNCTIOANLITY OF : ACQUISTION OF FULL SCALE CONFIGURATION OF MAGNETOMETER,
+// GET AND SET THE OUTPUT DATA RATE FOR X,Y & Z AXIS DEFINING THE ANALOG TO DIGITAL CONVERSION RATE FOR RELEVANT AXIS,
+// ENALES AND DISABLE INTERRUPT ON INT PIN OF LIS3MDL MAGNETOMETER CHIP, READ THE OUTPUT DATA REGISTERS OF X,Y,Z AXIS.
+//
+//******************************************************************************
 #include "I2C_DriverLis3mdl.h"
 #include "i2c.h"
 
