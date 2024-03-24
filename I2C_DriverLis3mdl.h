@@ -24,9 +24,9 @@
 #define  LIS3MDL_I2C_ADDRESS_WRITE       ((uint8_t)0x38)      // I2C ADDRESS FOR WRITE OPERATION, SDO/SA1 = 0 
 
 
-// DEVICE REGISTERS
+// DEVICE REGISTERS ADDRESS
 
-#define  LIS3MDL_OFFSET_X_REG_L_M         0x05      // X-AXIS OFFSET REGISTER   
+#define  LIS3MDL_OFFSET_X_REG_L_M         0x05      // X-AXIS OFFSET REGISTER ADDRESS  
 #define  LIS3MDL_OFFSET_X_REG_H_M         0x06
 #define  LIS3MDL_OFFSET_Y_REG_L_M         0x07      // Y-AXIS OFFSET REGISTER
 #define  LIS3MDL_OFFSET_Y_REG_H_M         0x08
@@ -119,7 +119,7 @@ static uint8_t LIS3MDL_getDataRate_XYZ         = 0x00;
 static uint8_t LIS3MDL_enableIntPin            = 0x01;         
 static uint8_t LIS3MDL_disableIntPin           = 0x00;         
 
-
+// GLOBAL VARIABLES
 extern uint8_t LIS3MDL_getStatusX;
 extern uint8_t LIS3MDL_getStatusY;
 extern uint8_t LIS3MDL_getStatusZ;
