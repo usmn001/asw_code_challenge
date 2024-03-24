@@ -631,8 +631,125 @@ return st;
 
 
 
+//
+// THIS FUNCTION READS OFFSET REGISTERS OF X AXIS
+//
+// OFFSET DATA FOR X-AXIS IS PROVIDED BY READING THE OFFSET REGISTERS OFFSET_X_REG_L_M AND OFFSET_X_REG_H_M 
+// BOTH REGISTERS CONTAIN DATA IN 2s COMPLEMENT FORM AND THE DATA FROM BOTH REGISTERS IS CONCATENATED INTO A SINGLE 16 BIT REGISTER.
+// WHERE MSB IS STORED AT HIGHEST ADDRESS AND LSB IS STORED AT LOWEST ADDRESS AND DATA REMAINS SAME IN 2´S COMPLEMENT FORM 
+// 
+//
+// @author M USMAN
+// Input:
+// @param LIS3MDL_I2C_ADDRESS_READ  : I2C BUS READ ADDRESS
+// @param LIS3MDL_OFFSET_X_REG_H_M  : ADDRESS OF HSB OFFSET REGISTER FOR X AXIS
+// @param LIS3MDL_OFFSET_X_REG_L_M  : ADDRESS OF LSB OFFSET REGISTER FOR X AXIS
+// @param LIS3MDL_DATA8             : SPECIFYING 8 NUMBER OF BITS TO BE READ ON 12C BUS
+//
+// Output: 
+// @param LIS3MDL_getOffset_X       : PROVIDING X AXIS 16-Bit OFFSET 
+//                                 
+//
+//
+// @return  : STATUS_OK    X-AXIS OFFSET REGISTERS READ SUCCESSFULLY  
+//            STATUS_ERROR X-AXIS OFFSET REGISTERS READ FAILED   
+//
+status_t LIS3MDL_getOffsetX()
+{
+
+status_t st;    
+status_t st_l_ox;
+status_t st_h_ox; 
+
+uint8_t x_lsb = 0;
+uint8_t x_msb = 0;
 
 
+st_l_ox = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_X_L,LIS3MDL_DATA8,&x_lsb);
+st_h_ox = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_X_H,LIS3MDL_DATA8,&x_msb);
+
+
+if( st_l_ox!=STATUS_ERROR && st_h_ox!=STATUS_ERROR )
+{
+LIS3MDL_getOffset_X = LIS3MDL_OUT_X_H;
+LIS3MDL_getOffset_X <<= 8;
+LIS3MDL_getOffset_X |= LIS3MDL_OUT_X_L;
+st = STATUS_OK;
+}
+else
+{
+st=STATUS_ERROR;    
+}
+
+return st;
+}
+
+
+
+//
+// THIS FUNCTION PROVIDES OUTPUT DATA FOR X AXIS 
+//
+// OUTPUT DATA FOR X-AXIS IS PROVIDED BY READING THE OUTPUT REGISTERS OUT_X_L AND OUT_X_H FOR FOR LSB AND MSB VALUES. 
+// 
+//
+// @author M USMAN
+// Input:
+// @param LIS3MDL_I2C_ADDRESS_READ  : I2C BUS READ ADDRESS
+// @param LIS3MDL_OUT_X_L           : ADDRESS OF OUTPUT REGISTER WITH LSB FOR X AXIS
+// @param LIS3MDL_OUT_X_H           : ADDRESS OF OUTPUT REGISTER WITH MSB FOR X AXIS
+// @param LIS3MDL_DATA8             : SPECIFYING 8 NUMBER OF BITS TO BE SENT ON 12C BUS
+//
+// Output: 
+// @param LIS3MDL_getOutputDataX    : PROVIDING Y AXIS 16-Bit OUTPUT DATA IN THE RANGE OF -16 GAUSS TO +16 GAUSS
+//                                    
+//                                   
+//                                   
+//
+//                                 
+//
+// @return  : STATUS_OK              X AXIS OUTPUT ACQUIRED SUCCESSFULLY  
+//            STATUS_ERROR           X AXIS OUTPUT ACQUISITION FAILED   
+//
+status_t LIS3MDL_getOutputX()
+{
+
+status_t st;
+status_t st_reg;    
+status_t st_l;
+status_t st_h;
+
+uint8_t x_lsb = 0;
+uint8_t x_msb = 0;
+
+st_reg =LIS3MDL_getOutputStatusX();
+
+if(st_reg!=STATUS_ERROR && LIS3MDL_getStatusX == 0x11)
+{
+st_l = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_L,LIS3MDL_DATA8,&x_lsb);
+st_h = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_H,LIS3MDL_DATA8,&x_msb);
+}
+
+if( st_l!=STATUS_ERROR && st_h!=STATUS_ERROR )
+{
+LIS3MDL_getOutputData_X = LIS3MDL_OUT_X_H;
+LIS3MDL_getOutputData_X = LIS3MDL_getOutputData_X<<8;
+LIS3MDL_getOutputData_X |= LIS3MDL_OUT_X_H;
+//
+// READ OFFSET REGISTER AND SUBTRACT IT FROM x AXIS OUTPUT
+// 
+    if(LIS3MDL_getOffsetX()!=STATUS_ERROR)
+    {   
+    LIS3MDL_getOutputData_X-=LIS3MDL_getOffset_X;
+    st=STATUS_OK;
+    }
+    else
+    {
+    st=STATUS_ERROR;
+    }
+
+}
+return st;
+}
 //
 // THIS FUNCTION PROVIDES OUTPUT STATUS FOR Y AXIS 
 //
@@ -648,7 +765,7 @@ return st;
 // @param LIS3MDL_DATA8             : SPECIFYING 8 NUMBER OF BITS TO BE SENT ON 12C BUS
 //
 // Output: 
-// @param LIS3MDL_ getStatusY      : PROVIDING STATUS REGISTER INFORMATION FOR Y AXIS WITH FOLLOWING VALUES  
+// @param LIS3MDL_ getStatusY       : PROVIDING STATUS REGISTER INFORMATION FOR Y AXIS WITH FOLLOWING VALUES  
 //                                    0x00 NO OVERRUN HAS OCCURED, NO NEW DATA AVAILABLE
 //                                    0x02 NO OVERRUN HAS OCCURED, NEW DATA AVAILABLE
 //                                    0x22 OVERRUN HAS OCCURED, NEW DATA AVAILABLE 
@@ -697,12 +814,12 @@ status_t st;
 status_t st_l_oy;
 status_t st_h_oy; 
 
-uint8_t z_lsb = 0;
-uint8_t z_msb = 0;
+uint8_t y_lsb = 0;
+uint8_t y_msb = 0;
 
 
-st_l_oy= i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_L,LIS3MDL_DATA8,&z_lsb);
-st_h_oy = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_H,LIS3MDL_DATA8,&z_msb);
+st_l_oy= i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_L,LIS3MDL_DATA8,&y_lsb);
+st_h_oy = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_H,LIS3MDL_DATA8,&y_msb);
 
 
 if( st_l_oy!=STATUS_ERROR && st_h_oy!=STATUS_ERROR )
@@ -716,12 +833,8 @@ else
 {
 st=STATUS_ERROR;    
 }
-
 return st;
 }
-
-
-
 //
 // THIS FUNCTION PROVIDES OUTPUT DATA FOR Y AXIS 
 //
@@ -754,15 +867,15 @@ status_t st_reg;
 status_t st_l;
 status_t st_h;
 
-uint8_t z_lsb = 0;
-uint8_t z_msb = 0;
+uint8_t y_lsb = 0;
+uint8_t y_msb = 0;
 
 st_reg =LIS3MDL_getOutputStatusY();
 
 if(st_reg!=STATUS_ERROR && LIS3MDL_getStatusY == 0x22)
 {
-st_l = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_L,LIS3MDL_DATA8,&z_lsb);
-st_h = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_H,LIS3MDL_DATA8,&z_msb);
+st_l = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_L,LIS3MDL_DATA8,&y_lsb);
+st_h = i2c_read(LIS3MDL_I2C_ADDRESS_READ,LIS3MDL_OUT_Y_H,LIS3MDL_DATA8,&y_msb);
 }
 
 if( st_l!=STATUS_ERROR && st_h!=STATUS_ERROR )
