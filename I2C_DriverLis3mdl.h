@@ -96,17 +96,26 @@ static uint8_t LIS3MDL_setDataRateXY_1000_Hz   = 0x02;  // Output Data Rate = 10
 // MAGNETOMETER : OUTPUT DATA RATES 155 Hz - 1000 Hz For Z AXIS
 // BYTE ORDER :   DEFAULT LITTLE ENDIAN 
 // 
-static uint8_t LIS3MDL_setDataRateZ_155_Hz     =    0x00;  // Output Data Rate = 155 Hz,   UHP Mode 
-static uint8_t LIS3MDL_setDataRateZ_300_Hz     =    0x04;  // Output Data Rate = 300 Hz,   HP Mode 
-static uint8_t LIS3MDL_setDataRateZ_560_Hz     =    0x08;  // Output Data Rate = 560 Hz,   MP Mode
-static uint8_t LIS3MDL_setDataRateZ_1000_Hz    =    0x0C;  // Output Data Rate = 1000 Hz,  LP Mode  
+static uint8_t LIS3MDL_setDataRateZ_155_Hz     = 0x00;  // Output Data Rate = 155 Hz,   UHP Mode 
+static uint8_t LIS3MDL_setDataRateZ_300_Hz     = 0x04;  // Output Data Rate = 300 Hz,   HP Mode 
+static uint8_t LIS3MDL_setDataRateZ_560_Hz     = 0x08;  // Output Data Rate = 560 Hz,   MP Mode
+static uint8_t LIS3MDL_setDataRateZ_1000_Hz    = 0x0C;  // Output Data Rate = 1000 Hz,  LP Mode  
 
 
-static uint8_t LIS3MDL_getFullScale            = 0;
-static uint8_t LIS3MDL_getHighDataRate_Z       = 0;
-static uint8_t LIS3MDL_getDataRate_XYZ         = 0;
+static uint8_t LIS3MDL_getFullScale            = 0x00;
+static uint8_t LIS3MDL_getHighDataRate_Z       = 0x00;
+static uint8_t LIS3MDL_getDataRate_XYZ         = 0x00;
+
 static uint8_t LIS3MDL_enableIntPin            = 0x01;         
 static uint8_t LIS3MDL_disableIntPin           = 0x00;         
+
+static uint8_t LIS3MDL_getStatusX              = 0x00;
+static uint8_t LIS3MDL_getStatusY              = 0x00;
+static uint8_t LIS3MDL_getStatusZ              = 0x00;
+
+static uint16_t LIS3MDL_getOutputDataX         = 0x0000;
+static uint16_t LIS3MDL_getOutputDataY         = 0x0000;
+static uint16_t LIS3MDL_getOutputDataZ         = 0x0000;
 
 
 // FUNCTION PROTOTYOES
@@ -136,6 +145,18 @@ status_t  LIS3MDL_getHighOutputDataRateZ();
 status_t  LIS3MDL_getOutputDataRateXYZ();
 status_t  LIS3MDL_enableInterruptInt();
 status_t  LIS3MDL_disableInterruptInt();
+
+status_t  LIS3MDL_getOutputStatusX();
+status_t  LIS3MDL_getOutputStatusY();
+status_t  LIS3MDL_getOutputStatusZ();
+
+status_t  LIS3MDL_getOutputX();
+status_t  LIS3MDL_getOutputY();
+status_t  LIS3MDL_getOutputZ();
+
+
+
+
 
 #endif
 
