@@ -5,6 +5,11 @@ Sensor driver for LIS3MDL sensor written in C programming language. This reposit
 
 In order to clone the driver from ssh git link use the command : git clone git@github.com:usmn001/asw_code_challenge.git
 
+The IDE used for the development of this driver is vscode , more details can be found here : https://code.visualstudio.com/
+
+If same IDE is used then folder .vscode contaiing configuration files for linker and compiler can either be used without any modification or
+if required minor modifications can be done for adding your own source code files in order to use the I2C Driver with application code.
+
 
 2 - Integration details
 The driver is platform-independent, you only need to include the driver header file I2C_DriverLis3mdl.h which also contains i2c.h header file in your source code and provide the source file I2C_DriverLis3mdl.c, i2c.c to the linker either inside your IDE or at the time of compilation. In this I2C Driver it is assumed that R/W bit of communication protocol is not managed by the microcontoller or microprocessor periperhal controller , for this purpose we are using the relevant device addresses for performing read and write operations to LIS3MDL magnetometer through I2C Bus. 
