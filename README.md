@@ -34,5 +34,5 @@ environment?
 In an RTOS environment we need to make sure that the read and write operations complete in a specified and determined time to make 
 relevant RTOS tasks meet their deadline, this becomes of utmost impertance in hard real time systems where we cannot violate deadline.
 
-- How might the I2C API be improved
+- How might the I2C API be improved ?
 The I2C API can be further improved if incoperated features for detecting I2C Bus Other Faults like i2c Bus Busy and so on.
