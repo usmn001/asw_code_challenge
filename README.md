@@ -1,7 +1,8 @@
 AAC-Clydespace Avionics : LIS3MDL I2C Driver
 
 1 - Introduction
-Sensor driver for LIS3MDL sensor written in C programming language. This repository contains the sensor driver files (.h and .c) to be included, or linked directly as a git submodule, in your project. The driver is MISRA compliant. 
+Sensor driver for LIS3MDL sensor written in C programming language. This repository contains the sensor driver files (.h and .c) to be included, or linked directly as a git submodule, in your project. The driver is DO1786D compliant and supports c99,c11,c14,c17 standards while the comiler used is
+GNU GCC , more information about the compiler can be found here https://gcc.gnu.org/
 
 In order to clone the driver from ssh git link use the command : git clone git@github.com:usmn001/asw_code_challenge.git
 
