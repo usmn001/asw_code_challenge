@@ -30,6 +30,23 @@ It is required that these functions should return STATUS_OK for correct function
 LIS3MDL_getOffsetX()
 LIS3MDL_setHighOutputDataRateXY_155()
 
+Example : Showing how to use driver function in application source code
+
+#include "I2C_DriverLis3mdl.h"
+#include <stdio.h>
+int main()
+{
+
+if(LIS3MDL_getOffsetX()!=STATUS_ERROR)  // Use the get function
+{                   
+printf("%i",LIS3MDL_getOffset_X);       // Access The Global Variable Containing the feteched data from offset regsiter
+}
+
+
+return 0;    
+}
+
+
 2.b Required properties
 A standard C language compiler for the target MCU
 A C library for the target MCU.
